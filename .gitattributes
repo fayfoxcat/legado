@@ -1,0 +1,10 @@
+# Keep Apple project files and scripts LF even on Windows checkouts.
+ios/**/*.sh text eol=lf
+ios/**/*.swift text eol=lf
+ios/**/*.md text eol=lf
+ios/**/*.yml text eol=lf
+ios/**/*.json text eol=lf
+ios/**/*.pbxproj text eol=lf
+ios/**/*.xcscheme text eol=lf
+ios/.gitignore text eol=lf
+.github/workflows/*.yml text eol=lf
