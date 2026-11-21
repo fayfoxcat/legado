@@ -87,6 +87,15 @@
 2. 把 PRODUCT_BUNDLE_IDENTIFIER 改成你自己的唯一 ID。
 3. 连接 iPhone，选择设备运行；或 Archive 后导出 IPA/上传 TestFlight。
 
+也可以用命令行归档/导出（需要证书和 provisioning profile）：
+
+    export DEVELOPMENT_TEAM=你的TeamID
+    export BUNDLE_ID=com.example.legado
+    cd ios
+    bash scripts/archive.sh
+
+导出结果在 ios/build/export/。默认 ExportOptions.plist 使用 development 方式；上架 App Store 前改成 app-store-connect。
+
 ## 重要限制
 
 - Windows 上无法运行 xcodebuild，也无法生成/签名 IPA；必须在 macOS + Xcode 上构建。

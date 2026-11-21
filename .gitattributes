@@ -6,5 +6,6 @@ ios/**/*.yml text eol=lf
 ios/**/*.json text eol=lf
 ios/**/*.pbxproj text eol=lf
 ios/**/*.xcscheme text eol=lf
+ios/**/*.plist text eol=lf
 ios/.gitignore text eol=lf
 .github/workflows/*.yml text eol=lf
