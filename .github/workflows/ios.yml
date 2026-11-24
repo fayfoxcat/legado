@@ -1,3 +1,4 @@
+# iOS build workflow. Kept on the iOS branch.
 name: iOS Build
 
 on:
@@ -46,3 +47,24 @@ jobs:
         with:
           name: LegadoiOS-simulator
           path: ios/LegadoiOS-simulator.zip
+
+      - name: Smoke test on Simulator
+        working-directory: ios
+        run: |
+          xcrun simctl list devices available
+          DEVICE=$(xcrun simctl list devices available | grep -m1 "iPhone" | sed -E 's/.*\(([0-9A-F-]+)\).*/\1/')
+          echo "Using simulator: $DEVICE"
+          xcrun simctl boot "$DEVICE" 2>/dev/null || true
+          xcrun simctl bootstatus "$DEVICE" -b
+          xcrun simctl install "$DEVICE" build/Build/Products/Debug-iphonesimulator/LegadoiOS.app
+          xcrun simctl launch "$DEVICE" io.legado.app.ios
+          sleep 5
+          xcrun simctl io "$DEVICE" screenshot smoke-test.png
+
+      - name: Upload smoke test screenshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: LegadoiOS-smoke-screenshot
+          path: ios/smoke-test.png
+          if-no-files-found: warn
